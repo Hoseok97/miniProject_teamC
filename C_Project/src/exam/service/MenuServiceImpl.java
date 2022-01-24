@@ -2,6 +2,7 @@ package exam.service;
 
 import exam.MenuController;
 
+
 import exam.Menu;
 
 import javafx.fxml.FXMLLoader;
@@ -15,35 +16,6 @@ import exam.service.CommonServiceImpl;
 
 public class MenuServiceImpl implements MenuService{
 
-	@Override
-	public Stage OpenOrderForm() {
-		// TODO Auto-generated method stub
-		Stage OrderForm = new Stage();
-		
-		Parent order = null;
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource("../order.fxml"));
-		
-		try {
-			order = loader.load();
-			OrderForm.setScene(new Scene(order));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		MenuController mctr = loader.getController();
-		mctr.setOrderForm(order);
-		
-		ComboBox<String> cmbUse = 
-				(ComboBox<String>)order.lookup("#cmbUse");
-		cmbUse.getItems().addAll("현금", "신용 카드", "계좌 이체");
-		
-		OrderForm.setTitle("주문 창");
-		OrderForm.show();
-		
-		return OrderForm;
-	}
 
 	@Override
 	public void MenuProc(Parent menuForm) {
@@ -151,6 +123,30 @@ public class MenuServiceImpl implements MenuService{
 		}
 		
 		System.out.println("총 금액:" + num +"원");
+		
+		Stage OrderForm = new Stage();
+		
+		Parent order = null;
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource("../order.fxml"));
+		
+		try {
+			order = loader.load();
+			OrderForm.setScene(new Scene(order));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		MenuController mctr = loader.getController();
+		mctr.setOrderForm(order);
+		
+		ComboBox<String> cmbUse = 
+				(ComboBox<String>)order.lookup("#cmbPay");
+		cmbUse.getItems().addAll("현금", "신용/체크카드", "휴대폰", "네이버페이", "카카오페이", "토스");
+		
+		OrderForm.setTitle("주문 창");
+		OrderForm.show();
 	}
 
 

@@ -34,7 +34,7 @@
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <TextField prefHeight="23.0" prefWidth="372.0">
+            <TextField fx:id="txtPlace"  prefHeight="23.0" prefWidth="372.0">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
@@ -51,7 +51,7 @@
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <CheckBox mnemonicParsing="false">
+            <CheckBox fx:id="chkUse" mnemonicParsing="false">
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
                </VBox.margin>
@@ -68,7 +68,7 @@
                   <Insets left="20.0" top="20.0" />
                </padding>
             </Label>
-            <ComboBox fx:id="cmbUse" prefWidth="150.0">
+            <ComboBox fx:id="cmbPay" prefWidth="150.0">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -77,7 +77,7 @@
       </VBox>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="103.0" text="확인">
+            <Button onAction="#OrderProc" mnemonicParsing="false" prefHeight="44.0" prefWidth="103.0" text="확인">
                <font>
                   <Font size="24.0" />
                </font>

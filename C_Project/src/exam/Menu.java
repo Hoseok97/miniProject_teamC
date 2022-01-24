@@ -5,6 +5,10 @@ public class Menu {
 	private int jb;
 	private int bb;
 	private int ts;
+	private String place;
+	private boolean use;
+	private String pay;
+	
 	public int getJj() {
 		return jj;
 	}
@@ -29,5 +33,24 @@ public class Menu {
 	public void setTs(int ts) {
 		this.ts = ts;
 	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public boolean isUse() {
+		return use;
+	}
+	public void setUse(boolean use) {
+		this.use = use;
+	}
+	public String getPay() {
+		return pay;
+	}
+	public void setPay(String pay) {
+		this.pay = pay;
+	}
+	
 	
 }

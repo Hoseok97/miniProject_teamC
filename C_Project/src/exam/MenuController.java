@@ -1,21 +1,26 @@
 package exam;
 
 import javafx.event.ActionEvent;
+
 import javafx.scene.Parent;
 import exam.service.CommonServiceImpl;
 import exam.service.CommonService;
 import exam.service.MenuService;
 import exam.service.MenuServiceImpl;
+import exam.service.OrderService;
+import exam.service.OrderServiceImpl;
 
 public class MenuController {
 	private Parent menuForm;
-	private Parent oderForm;
+	private Parent orderForm;
 	private MenuService ms;
 	private CommonService cs;
+	private OrderService os;
 	
 	public MenuController () {
 		ms = new MenuServiceImpl();
 		cs = new CommonServiceImpl();
+		os = new OrderServiceImpl();
 	}
 
 
@@ -26,7 +31,7 @@ public class MenuController {
 
 	public void setOrderForm(Parent orderForm) {
 		// TODO Auto-generated method stub
-		this.oderForm = orderForm;
+		this.orderForm = orderForm;
 		
 	}
 	
@@ -34,8 +39,8 @@ public class MenuController {
 		ms.MenuProc(menuForm);
 	}
 	
-	public void OpenOderForm() {
-		ms.OpenOrderForm();
+	public void OrderProc() {
+		os.OrderProc(orderForm);
 	}
 	
 	public void CancelProc(ActionEvent event) {
