@@ -20,6 +20,7 @@ public class OrderServiceImpl implements OrderService{
 		Menu m = new Menu();
 
 		TextField txtFld = (TextField) orderForm.lookup("#txtPlace");
+		System.out.println();
 		System.out.println("주소 : " + txtFld.getText());
 		if(txtFld.getText().isEmpty()) {
 			cs.errorMsg("입력에러", "비어 있는 주소", "주소가 비어있습니다. 입력해주세요.");

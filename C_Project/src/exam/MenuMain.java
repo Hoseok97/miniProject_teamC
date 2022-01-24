@@ -37,7 +37,7 @@ public class MenuMain extends Application{
 		cmbCnt4.getItems().addAll("1 인분", "2 인분", "3 인분", "4 인분");
 		
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("메뉴판");
+		primaryStage.setTitle("주문창");
 		primaryStage.show();
 	}
 	

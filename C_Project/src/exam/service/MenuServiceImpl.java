@@ -122,6 +122,7 @@ public class MenuServiceImpl implements MenuService{
 			num += m.getTs()*12000;
 		}
 		
+		System.out.println();
 		System.out.println("รั ฑÝพื:" + num +"ฟ๘");
 		
 		Stage OrderForm = new Stage();
