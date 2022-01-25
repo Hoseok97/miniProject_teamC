@@ -1,43 +1,51 @@
 package exam.service;
 
-import exam.MenuController;
+import java.util.List;
 
-import exam.Menu;
-import javafx.fxml.FXMLLoader;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import exam.service.CommonService;
-import exam.service.CommonServiceImpl;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import exam.DAO.DatabaseService;
+import exam.DAO.DatabaseServiceImpl;
+import exam.Menu;
 
-public class OrderServiceImpl implements OrderService{
-
+public class OrderServiceImpl implements OrderService {
+	DatabaseServiceImpl dao = new DatabaseServiceImpl();
+	static Menu m = new Menu();
+	
 	@Override
 	public void OrderProc(Parent orderForm) {
 		// TODO Auto-generated method stub
 		CommonService cs = new CommonServiceImpl();
-		Menu m = new Menu();
+		
 
 		TextField txtFld = (TextField) orderForm.lookup("#txtPlace");
-		System.out.println();
-		System.out.println("ÁÖ¼Ò : " + txtFld.getText());
+		System.out.println("ì£¼ì†Œ : " + txtFld.getText());
 		if(txtFld.getText().isEmpty()) {
-			cs.errorMsg("ÀÔ·Â¿¡·¯", "ºñ¾î ÀÖ´Â ÁÖ¼Ò", "ÁÖ¼Ò°¡ ºñ¾îÀÖ½À´Ï´Ù. ÀÔ·ÂÇØÁÖ¼¼¿ä.");
-			System.out.println("ÁÖ¼Ò°¡ ºñ¾îÀÖ½À´Ï´Ù. ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			cs.errorMsg("ì…ë ¥ì—ëŸ¬", "ë¹„ì–´ ìˆëŠ” ì£¼ì†Œ", "ì£¼ì†Œê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤. ì…ë ¥í•´ì£¼ì„¸ìš”.");
+			System.out.println("ì£¼ì†Œê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤. ì…ë ¥í•´ì£¼ì„¸ìš”");
 			txtFld.requestFocus();
 			System.out.println();
 			return;
 		}
-
+		m.setPlace(txtFld.getText());
 		System.out.println();
 
 		CheckBox chkUse = (CheckBox) orderForm.lookup("#chkUse");
 		if(chkUse.isSelected()) {
-			System.out.println("ÀÏÈ¸¿ëÇ° »ç¿ë");
+			System.out.println("ì¼íšŒìš©í’ˆ ì‚¬ìš©");
 			m.setUse(true);
 		}else {
-			System.out.println("ÀÏÈ¸¿ëÇ° »ç¿ë ¾ÈÇÔ");
+			System.out.println("ì¼íšŒìš©í’ˆ ì‚¬ìš© ì•ˆí•¨");
 			m.setUse(false);
 		}
 
@@ -46,25 +54,71 @@ public class OrderServiceImpl implements OrderService{
 		ComboBox<String> cmbPay = (ComboBox<String>) orderForm.lookup("#cmbPay");
 
 		if(cmbPay.getValue() == null) {
-			cs.errorMsg("°áÁ¦", "°áÁ¦ ¹æ¹ı ¼±ÅÃ", "°áÁ¦ ¼ö´ÜÀÌ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			cs.errorMsg("ê²°ì œ", "ê²°ì œ ë°©ë²• ì„ íƒ", "ê²°ì œ ìˆ˜ë‹¨ì´ ì„ íƒë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 			cmbPay.requestFocus();
 			return;
 		}
-		if(cmbPay.getValue().equals("Çö±İ")) {
-			m.setPay("Çö±İ");
-		}else if (cmbPay.getValue().equals("½Å¿ë/Ã¼Å©Ä«µå")) {
-			m.setPay("½Å¿ë/Ã¼Å©Ä«µå");
-		}else if (cmbPay.getValue().equals("ÈŞ´ëÆù")) {
-			m.setPay("ÈŞ´ëÆù");
-		}else if(cmbPay.getValue().equals("³×ÀÌ¹öÆäÀÌ")) {
-			m.setPay("³×ÀÌ¹öÆäÀÌ");
-		}else if(cmbPay.getValue().equals("Ä«Ä«¿ÀÆäÀÌ")) {
-			m.setPay("Ä«Ä«¿ÀÆäÀÌ");
-		}else if(cmbPay.getValue().equals("Åä½º")) {
-			m.setPay("Åä½º");
+		if(cmbPay.getValue().equals("í˜„ê¸ˆ ê²°ì œ")) {
+			m.setPay("í˜„ê¸ˆ ê²°ì œ");
+		}else if (cmbPay.getValue().equals("ì‹ ìš©/ì²´í¬ì¹´ë“œ")) {
+			m.setPay("ì‹ ìš©/ì²´í¬ì¹´ë“œ");
+		}else if (cmbPay.getValue().equals("íœ´ëŒ€í°ê²°ì œ")) {
+			m.setPay("íœ´ëŒ€í°ê²°ì œ");
+		}else if(cmbPay.getValue().equals("ë„¤ì´ë²„í˜ì´")) {
+			m.setPay("ë„¤ì´ë²„í˜ì´");
+		}else if(cmbPay.getValue().equals("ì¹´ì¹´ì˜¤í˜ì´")) {
+			m.setPay("ì¹´ì¹´ì˜¤í˜ì´");
+		}else if(cmbPay.getValue().equals("í† ìŠ¤")) {
+			m.setPay("í† ìŠ¤");
 		}
-		System.out.println(cmbPay.getValue() + " °áÁ¦");
+		System.out.println(cmbPay.getValue() + "ë¡œ ê²°ì œ");
+		
 		System.out.println();
+
+		if(dao.insert(m)) {
+			System.out.println("ì…ë ¥ ì„±ê³µ");
+			menuInfo(orderForm);
+			Stage s = (Stage) orderForm.getScene().getWindow();
+			s.close();
+		}
 	}
+
+	private void menuInfo(Parent orderForm) {
+		// TODO Auto-generated method stub
+		Stage stage = new Stage();
+		
+		AnchorPane ap = new AnchorPane();
+		TableView tableView = new TableView();
+		
+		TableColumn<Menu, Integer> num = new TableColumn<>("Number");
+		num.setCellValueFactory(new PropertyValueFactory("num"));
+		TableColumn<Menu, Integer> jj = new TableColumn<>("ì§œì¥ë©´");
+		jj.setCellValueFactory(new PropertyValueFactory("jj"));
+		TableColumn<Menu, Integer> jb = new TableColumn<>("ì§¬ë½•");
+		jb.setCellValueFactory(new PropertyValueFactory("jb"));
+		TableColumn<Menu, Integer> bb = new TableColumn<>("ë³¶ìŒë°¥");
+		bb.setCellValueFactory(new PropertyValueFactory("bb"));
+		TableColumn<Menu, Integer> ts = new TableColumn<>("íƒ•ìˆ˜ìœ¡");
+		ts.setCellValueFactory(new PropertyValueFactory("ts"));
+		TableColumn<Menu, String> place = new TableColumn<>("ì£¼ì†Œ");
+		place.setCellValueFactory(new PropertyValueFactory("place"));
+		TableColumn<Menu, Boolean> use = new TableColumn<>("ì¼íšŒìš©í’ˆ");
+		use.setCellValueFactory(new PropertyValueFactory("use"));
+		TableColumn<Menu, String> pay = new TableColumn<>("ê²°ì œìˆ˜ë‹¨");
+		pay.setCellValueFactory(new PropertyValueFactory("pay"));
+		
+		tableView.getColumns().addAll(num,jj,jb,bb,ts,place,use,pay);
+		
+		List<Menu> menuList = dao.selectAll();
+		ObservableList<Menu> data = 
+				FXCollections.observableArrayList(menuList);
+		tableView.setItems(data);
+
+		ap.getChildren().add(tableView);
+		stage.setScene(new Scene(ap,560,200));
+		stage.setTitle("ì£¼ë¬¸ì •ë³´");
+		stage.show();
+	}
+	
 
 }

@@ -22,22 +22,22 @@ public class MenuMain extends Application{
 		
 		ComboBox<String> cmbCnt1 = 
 				(ComboBox<String>)root.lookup("#cmbCnt1");
-		cmbCnt1.getItems().addAll("1 ¿Œ∫–", "2 ¿Œ∫–", "3 ¿Œ∫–", "4 ¿Œ∫–");
+		cmbCnt1.getItems().addAll("1 Ïù∏Î∂Ñ", "2 Ïù∏Î∂Ñ", "3 Ïù∏Î∂Ñ", "4 Ïù∏Î∂Ñ");
 		
 		ComboBox<String> cmbCnt2 = 
 				(ComboBox<String>)root.lookup("#cmbCnt2");
-		cmbCnt2.getItems().addAll("1 ¿Œ∫–", "2 ¿Œ∫–", "3 ¿Œ∫–", "4 ¿Œ∫–");
+		cmbCnt2.getItems().addAll("1 Ïù∏Î∂Ñ", "2 Ïù∏Î∂Ñ", "3 Ïù∏Î∂Ñ", "4 Ïù∏Î∂Ñ");
 		
 		ComboBox<String> cmbCnt3 = 
 				(ComboBox<String>)root.lookup("#cmbCnt3");
-		cmbCnt3.getItems().addAll("1 ¿Œ∫–", "2 ¿Œ∫–", "3 ¿Œ∫–", "4 ¿Œ∫–");
+		cmbCnt3.getItems().addAll("1 Ïù∏Î∂Ñ", "2 Ïù∏Î∂Ñ", "3 Ïù∏Î∂Ñ", "4 Ïù∏Î∂Ñ");
 		
 		ComboBox<String> cmbCnt4 = 
 				(ComboBox<String>)root.lookup("#cmbCnt4");
-		cmbCnt4.getItems().addAll("1 ¿Œ∫–", "2 ¿Œ∫–", "3 ¿Œ∫–", "4 ¿Œ∫–");
+		cmbCnt4.getItems().addAll("1 Ïù∏Î∂Ñ", "2 Ïù∏Î∂Ñ", "3 Ïù∏Î∂Ñ", "4 Ïù∏Î∂Ñ");
 		
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("¡÷πÆ√¢");
+		primaryStage.setTitle("Ï£ºÎ¨∏ Ï∞Ω");
 		primaryStage.show();
 	}
 	

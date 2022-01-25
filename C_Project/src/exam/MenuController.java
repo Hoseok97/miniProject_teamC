@@ -24,9 +24,9 @@ public class MenuController {
 	}
 
 
-	public void setRoot(Parent loginForm) {
+	public void setRoot(Parent root) {
 		// TODO Auto-generated method stub
-		this.menuForm = loginForm;
+		this.menuForm = root;
 	}
 
 	public void setOrderForm(Parent orderForm) {

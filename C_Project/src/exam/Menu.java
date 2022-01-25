@@ -1,6 +1,7 @@
 package exam;
 
 public class Menu {
+	private int num;
 	private int jj;
 	private int jb;
 	private int bb;
@@ -9,6 +10,12 @@ public class Menu {
 	private boolean use;
 	private String pay;
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public int getJj() {
 		return jj;
 	}

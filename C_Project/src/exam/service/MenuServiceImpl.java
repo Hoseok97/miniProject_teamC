@@ -1,25 +1,57 @@
 package exam.service;
 
-import exam.MenuController;
+import java.io.IOException;
 
+import java.util.List;
 
-import exam.Menu;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import exam.service.CommonService;
-import exam.service.CommonServiceImpl;
+import exam.DAO.DatabaseServiceImpl;
+import exam.MenuController;
+import exam.Menu;
 
-public class MenuServiceImpl implements MenuService{
-
-
+public class MenuServiceImpl implements MenuService {
+	DatabaseServiceImpl dao = new DatabaseServiceImpl();
+		
 	@Override
 	public void MenuProc(Parent menuForm) {
 		// TODO Auto-generated method stub
+		OrderServiceImpl os = new OrderServiceImpl();
+		
+		Stage OrderForm = new Stage();
+
+		Parent order = null;
+		
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource("/exam/Order.fxml"));
+
+		try {
+			order = loader.load();
+			OrderForm.setScene(new Scene(order));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		MenuController ctrl = loader.getController();
+		ctrl.setOrderForm(order);
+
+		ComboBox<String> cmbPay = (ComboBox<String>)order.lookup("#cmbPay");
+		cmbPay.getItems().addAll("í˜„ê¸ˆ ê²°ì œ", "ì‹ ìš©/ì²´í¬ì¹´ë“œ", "íœ´ëŒ€í°ê²°ì œ", "ë„¤ì´ë²„í˜ì´", "ì¹´ì¹´ì˜¤í˜ì´", "í† ìŠ¤");
+		
+		OrderForm.setTitle("ì£¼ë¬¸ì°½");
+		OrderForm.show();
+	
 		CommonService cs = new CommonServiceImpl();
 		Menu m = new Menu();
 		int num = 0;
@@ -28,49 +60,50 @@ public class MenuServiceImpl implements MenuService{
 			ComboBox<String> cmbCnt1 = 
 					(ComboBox<String>)menuForm.lookup("#cmbCnt1");
 			if(cmbCnt1.getValue() == null) {
-				cs.errorMsg("¼ö·®", "¼ö·® ¼±ÅÃ", "Â¥Àå¸é ¼ö·®ÀÌ ¼±ÅÃ µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				cs.errorMsg("ìˆ˜ëŸ‰", "ìˆ˜ëŸ‰ ì„ íƒ", "ì§œì¥ë©´ ìˆ˜ëŸ‰ì´ ì„ íƒ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				return;
 			}
 			
-			else if(cmbCnt1.getValue().equals("1 ÀÎºĞ")) {
+			else if(cmbCnt1.getValue().equals("1 ì¸ë¶„")) {
 				m.setJj(1);
 			}
-			else if(cmbCnt1.getValue().equals("2 ÀÎºĞ")) {
+			else if(cmbCnt1.getValue().equals("2 ì¸ë¶„")) {
 				m.setJj(2);
 			}
-			else if(cmbCnt1.getValue().equals("3 ÀÎºĞ")) {
+			else if(cmbCnt1.getValue().equals("3 ì¸ë¶„")) {
 				m.setJj(3);
 			}
-			else if(cmbCnt1.getValue().equals("4 ÀÎºĞ")) {
+			else if(cmbCnt1.getValue().equals("4 ì¸ë¶„")) {
 				m.setJj(4);
 			}
 			
-			System.out.println("Â¥Àå¸é "+ m.getJj() +"ÀÎºĞ");
+			System.out.println("ì§œì¥ë©´ "+ m.getJj() +"ì¸ë¶„");
 			num += m.getJj()*4000;
 			
 		}
+
 		if(((CheckBox)menuForm.lookup("#chkjb")).isSelected()) {
 			ComboBox<String> cmbCnt2 = 
 					(ComboBox<String>)menuForm.lookup("#cmbCnt2");
 			if(cmbCnt2.getValue() == null) {
-				cs.errorMsg("¼ö·®", "¼ö·® ¼±ÅÃ", "Â«»Í ¼ö·®ÀÌ ¼±ÅÃ µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				cs.errorMsg("ìˆ˜ëŸ‰", "ìˆ˜ëŸ‰ ì„ íƒ", "ì§¬ë½• ìˆ˜ëŸ‰ì´ ì„ íƒ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				return;
 			}
 			
-			else if(cmbCnt2.getValue().equals("1 ÀÎºĞ")) {
+			else if(cmbCnt2.getValue().equals("1 ì¸ë¶„")) {
 				m.setJb(1);
 			}
-			else if(cmbCnt2.getValue().equals("2 ÀÎºĞ")) {
+			else if(cmbCnt2.getValue().equals("2 ì¸ë¶„")) {
 				m.setJb(2);
 			}
-			else if(cmbCnt2.getValue().equals("3 ÀÎºĞ")) {
+			else if(cmbCnt2.getValue().equals("3 ì¸ë¶„")) {
 				m.setJb(3);
 			}
-			else if(cmbCnt2.getValue().equals("4 ÀÎºĞ")) {
+			else if(cmbCnt2.getValue().equals("4 ì¸ë¶„")) {
 				m.setJb(4);
 			}
 			
-			System.out.println("Â«»Í "+ m.getJb() +"ÀÎºĞ");
+			System.out.println("ì§¬ë½• "+ m.getJb() +"ì¸ë¶„");
 			num += m.getJb()*5000;
 			
 		}
@@ -78,77 +111,54 @@ public class MenuServiceImpl implements MenuService{
 			ComboBox<String> cmbCnt3 = 
 					(ComboBox<String>)menuForm.lookup("#cmbCnt3");
 			if(cmbCnt3.getValue() == null) {
-				cs.errorMsg("¼ö·®", "¼ö·® ¼±ÅÃ", "ººÀ½¹ä ¼ö·®ÀÌ ¼±ÅÃ µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				cs.errorMsg("ìˆ˜ëŸ‰", "ìˆ˜ëŸ‰ ì„ íƒ", "ë³¶ìŒë°¥ ìˆ˜ëŸ‰ì´ ì„ íƒ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				return;
 			}
 			
-			else if(cmbCnt3.getValue().equals("1 ÀÎºĞ")) {
+			else if(cmbCnt3.getValue().equals("1 ì¸ë¶„")) {
 				m.setBb(1);
 			}
-			else if(cmbCnt3.getValue().equals("2 ÀÎºĞ")) {
+			else if(cmbCnt3.getValue().equals("2 ì¸ë¶„")) {
 				m.setBb(2);
 			}
-			else if(cmbCnt3.getValue().equals("3 ÀÎºĞ")) {
+			else if(cmbCnt3.getValue().equals("3 ì¸ë¶„")) {
 				m.setBb(3);
 			}
-			else if(cmbCnt3.getValue().equals("4 ÀÎºĞ")) {
+			else if(cmbCnt3.getValue().equals("4 ì¸ë¶„")) {
 				m.setBb(4);
 			}
 			
-			System.out.println("ººÀ½¹ä "+ m.getBb() +"ÀÎºĞ");
+			System.out.println("ë³¶ìŒë°¥ "+ m.getBb() +"ì¸ë¶„");
 			num += m.getBb()*5000;
 		}
 		if(((CheckBox)menuForm.lookup("#chkts")).isSelected()) {
 			ComboBox<String> cmbCnt4 = 
 					(ComboBox<String>)menuForm.lookup("#cmbCnt4");
 			if(cmbCnt4.getValue() == null) {
-				cs.errorMsg("¼ö·®", "¼ö·® ¼±ÅÃ", "ÅÁ¼öÀ° ¼ö·®ÀÌ ¼±ÅÃ µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				cs.errorMsg("ìˆ˜ëŸ‰", "ìˆ˜ëŸ‰ ì„ íƒ", "íƒ•ìˆ˜ìœ¡ ìˆ˜ëŸ‰ì´ ì„ íƒ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				return;
 			}
-			else if(cmbCnt4.getValue().equals("1 ÀÎºĞ")) {
+			else if(cmbCnt4.getValue().equals("1 ì¸ë¶„")) {
 				m.setTs(1);
 			}
-			else if(cmbCnt4.getValue().equals("2 ÀÎºĞ")) {
+			else if(cmbCnt4.getValue().equals("2 ì¸ë¶„")) {
 				m.setTs(2);
 			}
-			else if(cmbCnt4.getValue().equals("3 ÀÎºĞ")) {
+			else if(cmbCnt4.getValue().equals("3 ì¸ë¶„")) {
 				m.setTs(3);
 			}
-			else if(cmbCnt4.getValue().equals("4 ÀÎºĞ")) {
+			else if(cmbCnt4.getValue().equals("4 ì¸ë¶„")) {
 				m.setTs(4);
 			}
 			
-			System.out.println("ÅÁ¼öÀ° "+ m.getTs() +"ÀÎºĞ");
+			System.out.println("íƒ•ìˆ˜ìœ¡ "+ m.getTs() +"ì¸ë¶„");
 			num += m.getTs()*12000;
 		}
 		
-		System.out.println();
-		System.out.println("ÃÑ ±İ¾×:" + num +"¿ø");
+		System.out.println("ì´ ê¸ˆì•¡:" + num +"ì›");
 		
-		Stage OrderForm = new Stage();
-		
-		Parent order = null;
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource("../order.fxml"));
-		
-		try {
-			order = loader.load();
-			OrderForm.setScene(new Scene(order));
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		MenuController mctr = loader.getController();
-		mctr.setOrderForm(order);
-		
-		ComboBox<String> cmbUse = 
-				(ComboBox<String>)order.lookup("#cmbPay");
-		cmbUse.getItems().addAll("Çö±İ", "½Å¿ë/Ã¼Å©Ä«µå", "ÈŞ´ëÆù", "³×ÀÌ¹öÆäÀÌ", "Ä«Ä«¿ÀÆäÀÌ", "Åä½º");
-		
-		OrderForm.setTitle("ÁÖ¹® Ã¢");
-		OrderForm.show();
+		//ê°’ ì „ë‹¬ì´ ì—†ìŒ
+		os.m  = m;
 	}
-
-
+	
 }
